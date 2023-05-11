@@ -70,10 +70,13 @@ def Sub_orange(sub_laranja):
     
     try:
             # Gravando valor na celula da laranja 
-            result = service.spreadsheets().values().get(spreadsheetId= SAMPLE_SPREADSHEET_ID, range="B2").execute()
-            a = result.get('values', [])
-            subtracao = a - subtrair_laranja
-            return subtracao
+            sheet = service.spreadsheets()
+            result = sheet.values().get(spreadsheetId = SAMPLE_SPREADSHEET_ID, range = "B2").execute()
+            values = result.get('values', [1])
+            valor = int(values[0][0])
+            sub = valor - int(subtrair_laranja)
+            print(sub)
+            return result
     
     except HttpError as err:
             print(err)
